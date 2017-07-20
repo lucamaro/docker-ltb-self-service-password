@@ -4,7 +4,7 @@ MAINTAINER Luca Maragnani "luca.maragnani@gmail.com"
 # Installation of nesesary package/software for this containers...
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive && apt-get upgrade -y \
 	&& apt-get install -y -q --no-install-recommends \
-	    libldap2-dev \
+		libldap2-dev \
 		libmcrypt-dev \
 		wget \
 	# See https://serverfault.com/questions/633394/php-configure-not-finding-ldap-header-libraries
@@ -14,7 +14,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive && apt-get upgrade -
 	&& cd /var/www && rm -rf html \
 	&& wget -q -O - http://ltb-project.org/archives/ltb-project-self-service-password-1.0.tar.gz | tar xzf - \
 	&& mv ltb-project-self-service-password-1.0 html \
-    && apt-get remove --auto-remove -y gcc m4 dpkg-dev libc6-dev libgcc-4.9-dev \
+	&& apt-get remove --auto-remove -y gcc m4 dpkg-dev libc6-dev libgcc-4.9-dev \
 		libpcre3-dev linux-libc-dev libldap2-dev libmcrypt-dev \
 	&& apt-get clean \
 	&& rm -rf /tmp/* /var/tmp/* \
