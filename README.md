@@ -1,5 +1,7 @@
 # LDAPToolBox Self Service Password for docker
 
+Docker container for [LTB Self Service Password](https://ltb-project.org/documentation/self-service-password). Dockerfile for project can be found at <https://github.com/lucamaro/docker-ltb-self-service-password>.
+
 ## Usage
 
 Run image customizing this command:
