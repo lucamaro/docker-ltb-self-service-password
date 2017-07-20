@@ -23,6 +23,9 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive && apt-get upgrade -
 	
 EXPOSE 80
 
+# init script as entrypoint for initial configuration
+COPY entrypoint.sh /usr/local/bin
+ENTRYPOINT ["sh", "/usr/local/bin/entrypoint.sh", "-DFOREGROUND"]
 	
  
 	
