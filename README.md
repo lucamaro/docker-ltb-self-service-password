@@ -23,6 +23,7 @@ In order to use TLS you must run the image with a volume containing certificate 
 	docker run -d -p 8443:443 \
 			-e USE_SSL=1 \
 			-v $PWD/certs:/etc/ssl/certs \
+			-v $PWD/certs:/etc/ssl/private \
 			--name dcim lucamaro/ltb-self-service-password
 
 Optionally generate self signed certificates with the following commands:
