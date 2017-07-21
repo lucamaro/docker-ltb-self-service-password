@@ -15,7 +15,8 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive && apt-get upgrade -
 	&& wget -q -O - http://ltb-project.org/archives/ltb-project-self-service-password-1.0.tar.gz | tar xzf - \
 	&& mv ltb-project-self-service-password-1.0 html \
 	&& apt-get remove --auto-remove -y gcc m4 dpkg-dev libc6-dev libgcc-4.9-dev \
-		libpcre3-dev linux-libc-dev libldap2-dev libmcrypt-dev \
+		libpcre3-dev linux-libc-dev \
+	&& apt-get remove -y libldap2-dev libmcrypt-dev \
 	&& apt-get clean \
 	&& rm -rf /tmp/* /var/tmp/* \
 	&& rm -rf /var/lib/apt/lists/* \
