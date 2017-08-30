@@ -20,7 +20,9 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive && apt-get upgrade -
 	&& apt-get clean \
 	&& rm -rf /tmp/* /var/tmp/* \
 	&& rm -rf /var/lib/apt/lists/* \
-	&& rm -rf /usr/src/*
+	&& rm -rf /usr/src/* \
+	# workaround for issue #128 about reset token
+	echo "output_buffering = On" > /usr/local/etc/php/php.ini
 	
 EXPOSE 80
 
