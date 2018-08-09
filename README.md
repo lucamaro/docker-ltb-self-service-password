@@ -4,18 +4,11 @@ Docker container for [LTB Self Service Password](https://ltb-project.org/documen
 
 ## Usage
 
-Run image customizing this command:
+Customize `config.inc.php.orig`, then run image customizing this command:
 
-	docker run -d -p 8000:80 \
+	docker run -d -p 8000:80 -v $PWD/config.inc.php.orig:/var/www/html/conf/config.inc.php \
 			--name ltb lucamaro/ltb-self-service-password
 			
-Copy `config.inc.php`, customize it, then restart container:
-
-	docker cp ltb:/var/www/html/conf/config.inc.php .
-	vi config.inc.php
-	docker cp config.inc.php ltb:/var/www/html/conf
-	docker restart ltb
-	
 ## Recommended step: use TLS
 
 In order to use TLS you must run the image with a volume containing certificate and key. Certificate name must be `ssl-cert.pem` and key name must be `ssl-cert.key`

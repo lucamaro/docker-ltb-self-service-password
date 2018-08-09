@@ -1,4 +1,4 @@
-FROM php:7-apache
+FROM php:7.2.6-apache
 MAINTAINER Luca Maragnani "luca.maragnani@gmail.com"
 
 # Installation of nesesary package/software for this containers...
@@ -10,19 +10,13 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive && apt-get upgrade -
 	# See https://serverfault.com/questions/633394/php-configure-not-finding-ldap-header-libraries
 	&& ln -s /usr/lib/x86_64-linux-gnu/libldap.so /usr/lib/libldap.so \
 	&& ln -s /usr/lib/x86_64-linux-gnu/liblber.so /usr/lib/liblber.so \
-	&& docker-php-ext-install ldap mcrypt mbstring \
-	&& cd /var/www && rm -rf html \
-	&& wget -q -O - http://ltb-project.org/archives/ltb-project-self-service-password-1.0.tar.gz | tar xzf - \
-	&& mv ltb-project-self-service-password-1.0 html \
-	&& apt-get remove --auto-remove -y gcc m4 dpkg-dev libc6-dev libgcc-4.9-dev \
-		libpcre3-dev linux-libc-dev \
-	&& apt-get remove -y libldap2-dev libmcrypt-dev \
-	&& apt-get clean \
-	&& rm -rf /tmp/* /var/tmp/* \
-	&& rm -rf /var/lib/apt/lists/* \
-	&& rm -rf /usr/src/* \
-	# workaround for issue #128 about reset token
-	echo "output_buffering = On" > /usr/local/etc/php/php.ini
+	&& docker-php-ext-install ldap mbstring 
+
+RUN  pecl install mcrypt-1.0.1 \
+	&& docker-php-ext-enable mcrypt 
+RUN 	cd /var/www && rm -rf html \
+	&& wget -q -O - http://ltb-project.org/archives/ltb-project-self-service-password-1.2.tar.gz | tar xzf - \
+	&& mv ltb-project-self-service-password-1.2 html 
 	
 EXPOSE 80
 
