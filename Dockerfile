@@ -1,8 +1,8 @@
-FROM php:7.2.6-apache
+FROM php:7.2.8-apache
 MAINTAINER Luca Maragnani "luca.maragnani@gmail.com"
 
 # Installation of nesesary package/software for this containers...
-RUN apt-get update && export DEBIAN_FRONTEND=noninteractive && apt-get upgrade -y \
+RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \ 
 	&& apt-get install -y -q --no-install-recommends \
 		libldap2-dev \
 		libmcrypt-dev \
@@ -15,8 +15,8 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive && apt-get upgrade -
 RUN  pecl install mcrypt-1.0.1 \
 	&& docker-php-ext-enable mcrypt 
 RUN 	cd /var/www && rm -rf html \
-	&& wget -q -O - http://ltb-project.org/archives/ltb-project-self-service-password-1.2.tar.gz | tar xzf - \
-	&& mv ltb-project-self-service-password-1.2 html 
+	&& wget -q -O - http://ltb-project.org/archives/ltb-project-self-service-password-1.3.tar.gz | tar xzf - \
+	&& mv ltb-project-self-service-password-1.3 html 
 	
 EXPOSE 80
 
